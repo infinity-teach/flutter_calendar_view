@@ -266,6 +266,8 @@ class EventGenerator<T extends Object?> extends StatelessWidget {
               child: eventTileBuilder(
                 date,
                 events[index].events,
+
+                // * this will change inflation of blueBar Events
                 Rect.fromLTWH(
                     events[index].left,
                     events[index].top,
