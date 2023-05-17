@@ -48,7 +48,7 @@ class CalendarEventData<T extends Object?> {
     required this.title,
     this.description = "",
     this.event,
-    this.color = Colors.blue,
+    this.color = const Color(0xFF5D42F2), // * Default Color for Event Bar
     this.startTime,
     this.endTime,
     this.titleStyle,
