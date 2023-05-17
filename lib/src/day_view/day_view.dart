@@ -55,6 +55,7 @@ class DayView<T extends Object?> extends StatefulWidget {
   /// User can define custom event arranger by implementing [EventArranger]
   /// class and pass object of that class as argument.
   final EventArranger<T>? eventArranger;
+  final CellTapCallback? onEventLongPress;
 
   /// This callback will run whenever page will change.
   final CalendarPageChangeCallBack? onPageChange;
@@ -188,6 +189,7 @@ class DayView<T extends Object?> extends StatefulWidget {
   const DayView({
     Key? key,
     this.eventTileBuilder,
+    this.onEventLongPress,
     this.dateStringBuilder,
     this.timeStringBuilder,
     this.controller,
@@ -389,6 +391,7 @@ class DayViewState<T extends Object?> extends State<DayView<T>> {
                       return ValueListenableBuilder(
                         valueListenable: _scrollConfiguration,
                         builder: (_, __, ___) => InternalDayViewPage<T>(
+                          onEventLongPress: widget.onEventLongPress,
                           key: ValueKey(
                               _hourHeight.toString() + date.toString()),
                           width: _width,

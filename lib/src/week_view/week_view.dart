@@ -164,6 +164,7 @@ class WeekView<T extends Object?> extends StatefulWidget {
   /// Ex, User Taps on Date page with date 11/01/2022 and time span is 1PM to 2PM.
   /// then DateTime object will be  DateTime(2022,01,11,1,0)
   final DateTapCallback? onDateTap;
+  final CellTapCallback<T>? onEventLongPress;
 
   /// Defines the day from which the week starts.
   ///
@@ -191,6 +192,7 @@ class WeekView<T extends Object?> extends StatefulWidget {
     this.pageTransitionDuration = const Duration(milliseconds: 300),
     this.pageTransitionCurve = Curves.ease,
     this.heightPerMinute = 1,
+    this.onEventLongPress,
     this.timeLineOffset = 0,
     this.showLiveTimeLineInAllDays = false,
     this.width,
@@ -403,6 +405,7 @@ class WeekViewState<T extends Object?> extends State<WeekView<T>> {
                         builder: (_, __, ___) => InternalWeekViewPage<T>(
                           key: ValueKey(
                               _hourHeight.toString() + dates[0].toString()),
+                          onEventLongPress: widget.onEventLongPress,
                           height: _height,
                           width: _width,
                           weekTitleWidth: _weekTitleWidth,

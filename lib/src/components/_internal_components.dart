@@ -215,6 +215,7 @@ class EventGenerator<T extends Object?> extends StatelessWidget {
 
   /// Called when user taps on event tile.
   final CellTapCallback<T>? onTileTap;
+  final CellTapCallback<T>? onLongPress;
 
   final EventScrollConfiguration scrollNotifier;
 
@@ -222,6 +223,7 @@ class EventGenerator<T extends Object?> extends StatelessWidget {
   const EventGenerator({
     Key? key,
     required this.height,
+    this.onLongPress,
     required this.width,
     required this.events,
     required this.heightPerMinute,
@@ -250,6 +252,7 @@ class EventGenerator<T extends Object?> extends StatelessWidget {
         left: events[index].left,
         right: events[index].right,
         child: GestureDetector(
+          onLongPress: () => onLongPress?.call(events[index].events, date),
           onTap: () => onTileTap?.call(events[index].events, date),
           child: Builder(builder: (context) {
             if (scrollNotifier.shouldScroll &&
@@ -258,16 +261,19 @@ class EventGenerator<T extends Object?> extends StatelessWidget {
                     .any((element) => element == scrollNotifier.event)) {
               _scrollToEvent(context);
             }
-            return eventTileBuilder(
-              date,
-              events[index].events,
-              Rect.fromLTWH(
-                  events[index].left,
-                  events[index].top,
-                  width - events[index].right - events[index].left,
-                  height - events[index].bottom - events[index].top),
-              events[index].startDuration,
-              events[index].endDuration,
+            return Tooltip(
+              message: events[index].events[index].title,
+              child: eventTileBuilder(
+                date,
+                events[index].events,
+                Rect.fromLTWH(
+                    events[index].left,
+                    events[index].top,
+                    width - events[index].right - events[index].left,
+                    height - events[index].bottom - events[index].top),
+                events[index].startDuration,
+                events[index].endDuration,
+              ),
             );
           }),
         ),

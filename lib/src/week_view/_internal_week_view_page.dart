@@ -83,6 +83,7 @@ class InternalWeekViewPage<T extends Object?> extends StatelessWidget {
 
   /// Called when user taps on event tile.
   final CellTapCallback<T>? onTileTap;
+  final CellTapCallback<T>? onEventLongPress;
 
   /// Defines which days should be displayed in one week.
   ///
@@ -115,6 +116,7 @@ class InternalWeekViewPage<T extends Object?> extends StatelessWidget {
   const InternalWeekViewPage({
     Key? key,
     required this.showVerticalLine,
+    required this.onEventLongPress,
     required this.weekTitleHeight,
     required this.weekDayBuilder,
     required this.weekNumberBuilder,
@@ -260,6 +262,7 @@ class InternalWeekViewPage<T extends Object?> extends StatelessWidget {
                                       height: height,
                                       date: filteredDates[index],
                                       onTileTap: onTileTap,
+                                      onLongPress: onEventLongPress,
                                       width: weekTitleWidth,
                                       eventArranger: eventArranger,
                                       eventTileBuilder: eventTileBuilder,
