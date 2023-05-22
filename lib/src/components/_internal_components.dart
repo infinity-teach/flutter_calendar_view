@@ -261,18 +261,36 @@ class EventGenerator<T extends Object?> extends StatelessWidget {
                     .any((element) => element == scrollNotifier.event)) {
               _scrollToEvent(context);
             }
-            return eventTileBuilder(
-              date,
-              events[index].events,
+            return Tooltip(
+              message: events[index].events[0].title,
+              child: eventTileBuilder(
+                date,
+                events[index].events,
 
-              // * this will change inflation of blueBar Events
-              Rect.fromLTWH(
-                  events[index].left,
-                  events[index].top,
-                  width - events[index].right - events[index].left,
-                  height - events[index].bottom - events[index].top),
-              events[index].startDuration,
-              events[index].endDuration,
+                // * this will change inflation of blueBar Events
+                Rect.fromLTWH(
+                    events[index].left,
+                    events[index].top,
+                    width - events[index].right - events[index].left,
+                    height - events[index].bottom - events[index].top),
+                events[index].startDuration,
+                events[index].endDuration,
+              ),
+              /*  return Tooltip(
+              message: events[index].events[index].title,
+              child: eventTileBuilder(
+                date,
+                events[index].events,
+
+                // * this will change inflation of blueBar Events
+                Rect.fromLTWH(
+                    events[index].left,
+                    events[index].top,
+                    width - events[index].right - events[index].left,
+                    height - events[index].bottom - events[index].top),
+                events[index].startDuration,
+                events[index].endDuration,
+              ),*/
             );
           }),
         ),
